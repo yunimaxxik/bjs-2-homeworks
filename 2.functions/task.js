@@ -1,6 +1,6 @@
 function getArrayParams(...arr) {
-	let min = 0;
-	let max = 0;
+	let min = arr[0];
+	let max = arr[0];
 	let sum = 0;
 	arr.map((a) => {
 		a < min ? (min = a) : a > max ? (max = a) : 1;
@@ -26,6 +26,9 @@ function differenceMaxMinWorker(...arr) {
 }
 
 function differenceEvenOddWorker(...arr) {
+	if (!arr.length) {
+		return 0;
+	}
 	let sumEvenElement = 0;
 	let sumOddElement = 0;
 	arr.map((a) => {
@@ -35,6 +38,9 @@ function differenceEvenOddWorker(...arr) {
 }
 
 function averageEvenElementsWorker(...arr) {
+	if (!arr.length) {
+		return 0;
+	}
 	let sumEvenElement = 0;
 	let countEvenElement = 0;
 	arr.map((a) => {
@@ -55,3 +61,5 @@ function makeWork(arrOfArr, func) {
 	// Return the maximum result
 	return Math.max(...results);
 }
+
+console.log(getArrayParams(5)); // { min: 5, max: 5, avg: 5 }
