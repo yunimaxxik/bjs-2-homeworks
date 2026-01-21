@@ -1,19 +1,32 @@
 function Student(name, gender, age) {
-  
+	this.name = name;
+	this.gender = gender;
+	this.age = age;
+	this.marks = [];
 }
 
 Student.prototype.setSubject = function (subjectName) {
-  
-}
+	this.subject = subjectName;
+};
 
 Student.prototype.addMarks = function (...marks) {
-  
-}
+	if (this.marks) {
+		this.marks = [...marks];
+	} else {
+		console.log('Пользователь отчислен');
+	}
+};
 
 Student.prototype.getAverage = function () {
-  
-}
+	if (this.marks.length > 0 && this.marks) {
+		return this.marks.reduce((acm, a) => acm + a, 0) / this.marks.length;
+	} else {
+		return 0;
+	}
+};
 
 Student.prototype.exclude = function (reason) {
-  
-}
+	delete this.subject;
+	delete this.marks;
+	this.exclude = reason;
+};
