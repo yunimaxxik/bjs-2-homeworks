@@ -11,9 +11,7 @@ Student.prototype.setSubject = function (subjectName) {
 
 Student.prototype.addMarks = function (...marks) {
 	if (this.marks) {
-		this.marks = [...marks];
-	} else {
-		console.log('Пользователь отчислен');
+		this.marks.push(...marks);
 	}
 };
 
