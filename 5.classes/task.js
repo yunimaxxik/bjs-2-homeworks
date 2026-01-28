@@ -9,7 +9,7 @@ class PrintEditionItem {
 		this.type = type;
 	}
 	fix() {
-		this._state *= 1.5;
+		this.state *= 1.5;
 	}
 	set state(state) {
 		if (state < 0) {
@@ -26,32 +26,32 @@ class PrintEditionItem {
 }
 
 class Magazine extends PrintEditionItem {
-	constructor(name, releaseDate, pagesCount, type) {
+	constructor(name, releaseDate, pagesCount, type = 'magazine') {
 		super(name, releaseDate, pagesCount, type);
 	}
 }
 
 class Book extends PrintEditionItem {
-	constructor(author, name, releaseDate, pagesCount, type) {
+	constructor(author, name, releaseDate, pagesCount, type = 'book') {
 		super(name, releaseDate, pagesCount, type);
 		this.author = author;
 	}
 }
 
 class NovelBook extends Book {
-	constructor(author, name, releaseDate, pagesCount, type) {
+	constructor(author, name, releaseDate, pagesCount, type = 'novel') {
 		super(author, name, releaseDate, pagesCount, type);
 	}
 }
 
 class FantasticBook extends Book {
-	constructor(author, name, releaseDate, pagesCount, type) {
+	constructor(author, name, releaseDate, pagesCount, type = 'fantastic') {
 		super(author, name, releaseDate, pagesCount, type);
 	}
 }
 
 class DetectiveBook extends Book {
-	constructor(author, name, releaseDate, pagesCount, type) {
+	constructor(author, name, releaseDate, pagesCount, type = 'detective') {
 		super(author, name, releaseDate, pagesCount, type);
 	}
 }
