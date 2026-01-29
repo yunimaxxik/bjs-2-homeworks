@@ -90,53 +90,37 @@ class Student {
 		this.name = name;
 		this.gender = gender;
 		this.age = age;
-		this.marks = [];
+		this.marks = {};
 	}
 	addMark(score, subjectName) {
 		if (score < 2 || score > 5) {
 			return;
 		}
-
-		const subjectIndex = this.marks.findIndex((item) =>
-			item.hasOwnProperty(subjectName),
-		);
-
-		if (subjectIndex !== -1) {
-			this.marks[subjectIndex][subjectName].push(score);
+		if (!this.marks[subjectName]) {
+			this.marks[subjectName] = [score];
 		} else {
-			this.marks.push({ [subjectName]: [score] });
+			this.marks[subjectName].push(score);
 		}
 	}
 	getAverageBySubject(subjectName) {
-		const subject = this.marks.find((item) => item.hasOwnProperty(subjectName));
-
-		if (!subject) {
+		if (!this.marks.hasOwnProperty(subjectName)) {
 			return 0;
 		}
-		const marks = subject[subjectName];
-		const average = marks.reduce((sum, mark) => sum + mark, 0) / marks.length;
-		return average;
+		const marks = this.marks[subjectName];
+		const sum = marks.reduce((total, mark) => total + mark, 0);
+		return sum / marks.length;
 	}
 	getAverage() {
-		return (
-			this.marks.reduce((acm, a) => {
-				const marks = Object.values(a)[0];
-				const average =
-					marks.reduce((sum, mark) => sum + mark, 0) / marks.length;
-				return average + acm;
-			}, 0) / this.marks.length
-		);
+		let sum = 0;
+		let count = 0;
+		Object.entries(this.marks).forEach(([key, value]) => {
+			count += Object.values(value).length;
+			sum += Object.values(value).reduce((acm, a) => acm + a, 0);
+		});
+		return sum / count;
 	}
 	excluded(reason) {
 		delete this.marks;
 		this.excluded = reason;
 	}
 }
-
-const student = new Student('Олег Никифоров');
-student.addMark(5, 'химия');
-student.addMark(5, 'химия');
-student.addMark(5, 'физика');
-student.addMark(4, 'физика');
-student.addMark(6, 'физика'); // Оценка не добавится, так как больше 5
-console.log(student.getAverage()); // Средний балл по всем предметам 4.75
