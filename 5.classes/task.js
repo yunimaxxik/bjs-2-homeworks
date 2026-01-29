@@ -111,6 +111,9 @@ class Student {
 		return sum / marks.length;
 	}
 	getAverage() {
+		if (!Object.keys(this.marks)) {
+			return 0;
+		}
 		let sum = 0;
 		let count = 0;
 		Object.entries(this.marks).forEach(([key, value]) => {
