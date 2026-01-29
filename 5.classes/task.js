@@ -111,7 +111,7 @@ class Student {
 		return sum / marks.length;
 	}
 	getAverage() {
-		if (!Object.keys(this.marks)) {
+		if (Object.keys(this.marks).length === 0) {
 			return 0;
 		}
 		let sum = 0;
