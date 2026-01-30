@@ -10,7 +10,7 @@ function validateCount(count) {
 	try {
 		return parseCount(count);
 	} catch (error) {
-		console.log(error);
+		return error;
 	}
 }
 
@@ -18,19 +18,15 @@ function validateCount(count) {
 
 class Triangle {
 	constructor(a, b, c) {
-		try {
-			if (a <= 0 || b <= 0 || c <= 0) {
-				throw new Error('Стороны должны быть положительными');
-			}
-			if (a + b <= c || a + c <= b || b + c <= a) {
-				throw new Error('Треугольник не существует');
-			}
-			this.a = a;
-			this.b = b;
-			this.c = c;
-		} catch (error) {
-			console.log(error);
+		if (a <= 0 || b <= 0 || c <= 0) {
+			throw new Error('Стороны должны быть положительными');
 		}
+		if (a + b <= c || a + c <= b || b + c <= a) {
+			throw new Error('Треугольник не существует');
+		}
+		this.a = a;
+		this.b = b;
+		this.c = c;
 	}
 	get perimeter() {
 		return this.a + this.b + this.c;
@@ -57,3 +53,6 @@ function getTriangle(a, b, c) {
 		};
 	}
 }
+const triangle = getTriangle(1, 3, 100);
+console.log(triangle.area);
+console.log(triangle.perimeter);
